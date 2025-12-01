@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Microsoft.Data.Sqlite;
 
 namespace habitTracker
@@ -67,6 +70,47 @@ namespace habitTracker
                 }
             }
         }
+        private static void ViewRecords()
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var tableCommand = connection.CreateCommand();
+                tableCommand.CommandText = 
+                    "SELECT * FROM Coding";
+                    List<CodingHours> tableData = new();
+
+                    SqliteDataReader reader = tableCommand.ExecuteReader();
+
+                    if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        tableData.Add(
+                        new CodingHours
+                        {
+                            id=reader.GetInt32(0),
+                            date = DateTime.ParseExact(reader.GetString(1), "mm-dd-yy", new CultureInfo("en-US")),
+                            Quantity = reader.GetInt32(2)
+                        }); ;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows are found");
+                }
+                connection.Close();
+
+                Console.WriteLine("---------------------------------------------------------\n");
+
+                foreach (var ch in tableData)
+                {
+                    Console.WriteLine($"{ch.id} - {ch.date.ToString("mm-dd-yy")} - Hours: {ch.Quantity}");
+                }
+
+                Console.WriteLine("---------------------------------------------------------\n");
+            }
+        }
         private static void AddRecord()
         {
             string date = GetDateInput();
@@ -85,10 +129,7 @@ namespace habitTracker
             }
 
         }
-        private static void ViewRecords()
-        {
-            string date = GetDateInput();
-        }
+        
         internal static string GetDateInput()
         {
             Console.WriteLine("Enter the date (MM-DD-YY), or press 0 (zero) to return to the main menu: ");
@@ -107,7 +148,23 @@ namespace habitTracker
 
             return hours;
         }
+
+        private static void DeleteRecord()
+        {
+            Console.Clear();
+            ViewRecords();
+            var recordID = GetNumberInput(Console.WriteLine("Please type the ID of the record you would like to delete, or 0 (zero) to return to the main menu."));
+
+        }
         
     }
     
+    public class CodingHours
+    {
+        public int id { get; set;}
+
+        public DateTime date{ get; set;}
+
+        public int Quantity {get; set;}
+    }
 }

@@ -19,7 +19,7 @@ namespace habitTracker
                 tableCommand.CommandText = @"CREATE TABLE IF NOT EXISTS Coding(
                                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
                                             Date TEXT,
-                                            Quantitiy INTEGER
+                                            Quantity INTEGER
                                             )";
 
                 tableCommand.ExecuteNonQuery();

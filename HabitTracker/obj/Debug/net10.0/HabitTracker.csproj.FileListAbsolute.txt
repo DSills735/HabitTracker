@@ -41,3 +41,4 @@ C:\Users\David\OneDrive\Desktop\Computer Programming\Project Files\HabitTracker\
 C:\Users\David\OneDrive\Desktop\Computer Programming\Project Files\HabitTracker\HabitTracker\obj\Debug\net10.0\HabitTracker.pdb
 C:\Users\David\OneDrive\Desktop\Computer Programming\Project Files\HabitTracker\HabitTracker\obj\Debug\net10.0\HabitTracker.genruntimeconfig.cache
 C:\Users\David\OneDrive\Desktop\Computer Programming\Project Files\HabitTracker\HabitTracker\obj\Debug\net10.0\ref\HabitTracker.dll
+C:\Users\David\OneDrive\Desktop\Computer Programming\Project Files\HabitTracker\HabitTracker\obj\Debug\net10.0\HabitTracker.sourcelink.json
